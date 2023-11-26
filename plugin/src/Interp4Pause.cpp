@@ -94,5 +94,5 @@ AbstractInterp4Command* Interp4Pause::CreateCmd()
  */
 void Interp4Pause::PrintSyntax() const
 {
-  cout << "   Move  NazwaObiektu  Szybkosc[m/s]: " << _Speed_mmS <<    "\tDlugoscDrogi[m]: "  << _Length_mm/100 << endl;
+  cout << "   Pause  NazwaObiektu  Szybkosc[m/s]: " << _Speed_mmS <<    "\tDlugoscDrogi[m]: "  << _Length_mm/100 << endl;
 }
