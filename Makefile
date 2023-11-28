@@ -16,7 +16,7 @@ __lines_for_space__:
 __plugin__:
 	cd plugin; make
 
-CPPFLAGS=-Wall -pedantic -std=c++17 -Iinc
+CPPFLAGS=-Wall -pedantic -std=c++17 -Iinc -g
 LDFLAGS=-Wall
 
 
