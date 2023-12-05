@@ -21,6 +21,22 @@
     */
     class AbstractMobileObj {
      public:
+    
+      Vector3D  _Position_m;
+      
+      double _Ang_Yaw_deg = 0;
+
+      double _Ang_Pitch_deg = 0;
+
+      double _Ang_Roll_deg = 0;
+
+      std::string  _Name;
+
+      Vector3D  Scale;
+      Vector3D  Shift;
+      int colour[3];
+
+
 
        virtual ~AbstractMobileObj() {}
       
@@ -101,6 +117,16 @@
         *  \return Nazwa obiektu.
         */
         virtual const std::string & GetName() const = 0;
+
+        virtual void SetShift(const Vector3D &rShift) = 0;
+        virtual void SetScale(const Vector3D &rScale) = 0;
+        virtual void SetColor(const std::string &rCol) = 0;
+        // virtual Vector3D GetShift() const = 0;
+        // virtual Vector3D GetScale() const = 0;
+        // virtual std::string GetColor() const = 0;
+
+
+        
     };
 
 
