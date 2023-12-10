@@ -22,7 +22,7 @@ LDFLAGS=-Wall
 
 
 interp: obj/main.o obj/LibInterface.o obj/xmlinterp.o obj/klient.o obj/toolbox.o obj/xmlhandler.o
-	g++ ${LDFLAGS} -o interp  obj/main.o obj/LibInterface.o obj/xmlinterp.o obj/klient.o obj/toolbox.o obj/xmlhandler.o -ldl -lxerces-c
+	g++ ${LDFLAGS} -o interp  obj/main.o obj/LibInterface.o obj/xmlinterp.o obj/klient.o obj/toolbox.o obj/xmlhandler.o -ldl -lxerces-c -lpthread
 
 obj/main.o: src/main.cpp  inc/AbstractInterp4Command.hh inc/AbstractScene.hh\
             inc/AbstractComChannel.hh inc/LibInterface.hh inc/xmlinterp.hh\
