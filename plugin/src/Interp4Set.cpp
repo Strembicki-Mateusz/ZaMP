@@ -28,7 +28,7 @@ AbstractInterp4Command* CreateCmd(void)
 /*!
  *
  */
-Interp4Set::Interp4Set(): Obiekt("O"),X(0),Y(0),Z(0),RotX(0),RotY(0),RotZ(0)
+Interp4Set::Interp4Set(): _Speed_mmS(0)
 {}
 
 
@@ -40,7 +40,7 @@ void Interp4Set::PrintCmd() const
   /*
    *  Tu trzeba napisać odpowiednio zmodyfikować kod poniżej.
    */
-  cout << GetCmdName() << " " << Obiekt << " " << X << " "<< Y<< " "<<Z<< " "<< RotX<< " "<<RotY<< " "<<RotZ<< endl;
+  cout << GetCmdName() << " " << _Speed_mmS  << " 10  2" << endl;
 }
 
 
@@ -76,8 +76,7 @@ bool Interp4Set::ReadParams(std::istream& Strm_CmdsList)
   /*
    *  Tu trzeba napisać odpowiedni kod.
    */
-  Strm_CmdsList >> Obiekt >> X >> Y >> Z >> RotX >> RotY >> RotZ;
-  return !Strm_CmdsList.fail();
+  return true;
 }
 
 
@@ -95,5 +94,5 @@ AbstractInterp4Command* Interp4Set::CreateCmd()
  */
 void Interp4Set::PrintSyntax() const
 {
-  cout << "   Set  NazwaObiektu  X Y Z  RotX RotY RotZ "<< endl;
+  cout << "   Set nazwa_obiektu wsp_x wsp_y wsp_z kat_OX kat_OY kat_OZ" << endl;
 }

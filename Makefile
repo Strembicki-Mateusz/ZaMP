@@ -16,18 +16,34 @@ __lines_for_space__:
 __plugin__:
 	cd plugin; make
 
-CPPFLAGS=-Wall -pedantic -std=c++17 -Iinc -g
+CPPFLAGS=-Wall -pedantic -std=c++17 -Iinc
 LDFLAGS=-Wall
 
 
 
+interp: obj/main.o obj/LibInterface.o obj/xmlinterp.o obj/klient.o obj/toolbox.o obj/xmlhandler.o
+	g++ ${LDFLAGS} -o interp  obj/main.o obj/LibInterface.o obj/xmlinterp.o obj/klient.o obj/toolbox.o obj/xmlhandler.o -ldl -lxerces-c
 
-interp: obj/main.o
-	g++ ${LDFLAGS} -o interp  obj/main.o -ldl
-
-obj/main.o: src/main.cpp inc/AbstractInterp4Command.hh inc/AbstractScene.hh\
-            inc/AbstractComChannel.hh
+obj/main.o: src/main.cpp  inc/AbstractInterp4Command.hh inc/AbstractScene.hh\
+            inc/AbstractComChannel.hh inc/LibInterface.hh inc/xmlinterp.hh\
+			inc/xmlhandler.hh inc/toolbox.hh inc/klient.hh
 	g++ -c ${CPPFLAGS} -o obj/main.o src/main.cpp
+
+obj/LibInterface.o: src/LibInterface.cpp inc/LibInterface.hh
+	g++ -c ${CPPFLAGS} -o obj/LibInterface.o src/LibInterface.cpp
+
+obj/xmlinterp.o: src/xmlinterp.cpp inc/xmlinterp.hh
+	g++ -c ${CPPFLAGS} -o obj/xmlinterp.o src/xmlinterp.cpp
+
+obj/klient.o: src/klient.cpp inc/klient.hh
+	g++ -c ${CPPFLAGS} -o obj/klient.o src/klient.cpp
+
+obj/toolbox.o: src/toolbox.cpp inc/toolbox.hh
+	g++ -c ${CPPFLAGS} -o obj/toolbox.o src/toolbox.cpp
+
+obj/xmlhandler.o: src/xmlhandler.cpp inc/xmlhandler.hh
+	g++ -c ${CPPFLAGS} -o obj/xmlhandler.o src/xmlhandler.cpp
+
 
 doc:
 	cd dox; make
