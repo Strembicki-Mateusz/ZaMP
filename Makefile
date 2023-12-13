@@ -1,8 +1,11 @@
-__start__: obj __lines_for_space__ interp __plugin__
+__start__: obj libs __lines_for_space__ interp __plugin__
 	export LD_LIBRARY_PATH="./libs"; ./interp
 
 obj:
 	mkdir obj
+
+libs:
+	mkdir libs
 
 
 __lines_for_space__:
@@ -21,12 +24,10 @@ LDFLAGS=-Wall
 
 
 
-interp: obj/main.o obj/LibInterface.o obj/xmlinterp.o obj/klient.o obj/toolbox.o obj/xmlhandler.o
-	g++ ${LDFLAGS} -o interp  obj/main.o obj/LibInterface.o obj/xmlinterp.o obj/klient.o obj/toolbox.o obj/xmlhandler.o -ldl -lxerces-c -lpthread
+interp: obj/main.o obj/LibInterface.o obj/xmlinterp.o obj/klient.o obj/Scene.o obj/Reader.o obj/Sender.o obj/Set4LibInterfaces.o 
+	g++ ${LDFLAGS} -o interp  obj/main.o obj/LibInterface.o obj/xmlinterp.o obj/klient.o obj/Scene.o obj/Reader.o obj/Sender.o obj/Set4LibInterfaces.o  -ldl -lxerces-c -lpthread
 
-obj/main.o: src/main.cpp  inc/AbstractInterp4Command.hh inc/AbstractScene.hh\
-            inc/AbstractComChannel.hh inc/LibInterface.hh inc/xmlinterp.hh\
-			inc/xmlhandler.hh inc/toolbox.hh inc/klient.hh
+obj/main.o: src/main.cpp
 	g++ -c ${CPPFLAGS} -o obj/main.o src/main.cpp
 
 obj/LibInterface.o: src/LibInterface.cpp inc/LibInterface.hh
@@ -38,12 +39,17 @@ obj/xmlinterp.o: src/xmlinterp.cpp inc/xmlinterp.hh
 obj/klient.o: src/klient.cpp inc/klient.hh
 	g++ -c ${CPPFLAGS} -o obj/klient.o src/klient.cpp
 
-obj/toolbox.o: src/toolbox.cpp inc/toolbox.hh
-	g++ -c ${CPPFLAGS} -o obj/toolbox.o src/toolbox.cpp
+obj/Scene.o: src/Scene.cpp inc/Scene.hh
+	g++ -c ${CPPFLAGS} -o obj/Scene.o src/Scene.cpp
 
-obj/xmlhandler.o: src/xmlhandler.cpp inc/xmlhandler.hh
-	g++ -c ${CPPFLAGS} -o obj/xmlhandler.o src/xmlhandler.cpp
+obj/Reader.o: src/Reader.cpp inc/Reader.hh
+	g++ -c ${CPPFLAGS} -o obj/Reader.o src/Reader.cpp
 
+obj/Sender.o: src/Sender.cpp inc/Sender.hh
+	g++ -c ${CPPFLAGS} -o obj/Sender.o src/Sender.cpp
+
+obj/Set4LibInterfaces.o: src/Set4LibInterfaces.cpp inc/Set4LibInterfaces.hh
+	g++ -c ${CPPFLAGS} -o obj/Set4LibInterfaces.o src/Set4LibInterfaces.cpp
 
 doc:
 	cd dox; make

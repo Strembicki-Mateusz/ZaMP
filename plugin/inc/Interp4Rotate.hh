@@ -26,7 +26,10 @@ class Interp4Rotate: public AbstractInterp4Command {
    *  do przechowywania wartości parametrów danego polecenia.
    *  Ponieżej zdefiniowane jest tylko jedno pole jako przykład.
    */
-  double  _Speed_mmS;
+    std::string _Name; 
+    std::string _Axis; 
+    double _Ang_speed;
+    double _Angle;
  public:
   /*!
    * \brief
@@ -60,9 +63,7 @@ class Interp4Rotate: public AbstractInterp4Command {
    * \retval true - operacja powiodła się,
    * \retval false - w przypadku przeciwnym.
    */
-  virtual bool ExecCmd( AbstractScene      &rScn, 
-                        const char         *sMobObjName,
-                        AbstractComChannel &rComChann ) override;
+  virtual bool ExecCmd(Scene *scene) const override;
   /*!
    * \brief Czyta wartości parametrów danego polecenia
    */

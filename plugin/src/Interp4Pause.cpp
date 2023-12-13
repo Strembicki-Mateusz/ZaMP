@@ -28,7 +28,7 @@ AbstractInterp4Command* CreateCmd(void)
 /*!
  *
  */
-Interp4Pause::Interp4Pause(): _Speed_mmS(0)
+Interp4Pause::Interp4Pause(): _Time_ms(0)
 {}
 
 
@@ -40,7 +40,7 @@ void Interp4Pause::PrintCmd() const
   /*
    *  Tu trzeba napisać odpowiednio zmodyfikować kod poniżej.
    */
-  cout << GetCmdName() << " " << _Speed_mmS  << " 10  2" << endl;
+  cout << GetCmdName() << " " << _Time_ms  << endl;
 }
 
 
@@ -56,16 +56,14 @@ const char* Interp4Pause::GetCmdName() const
 /*!
  *
  */
-bool Interp4Pause::ExecCmd( AbstractScene      &rScn, 
-                           const char         *sMobObjName,
-			   AbstractComChannel &rComChann
-			 )
+bool Interp4Pause::ExecCmd(Scene *scene) const
 {
-  /*
-   *  Tu trzeba napisać odpowiedni kod.
-   */
+  scene->LockAccess();
+  usleep(_Time_ms * 1000);
+  scene->UnlockAccess();
   return true;
 }
+
 
 
 /*!
@@ -73,10 +71,12 @@ bool Interp4Pause::ExecCmd( AbstractScene      &rScn,
  */
 bool Interp4Pause::ReadParams(std::istream& Strm_CmdsList)
 {
-  /*
-   *  Tu trzeba napisać odpowiedni kod.
-   */
-  return true;
+  if (!(Strm_CmdsList >> _Time_ms))
+  {
+    std::cout << "Blad wczytywania czasu" << std::endl;
+    return 1;
+  }
+  return 0;
 }
 
 

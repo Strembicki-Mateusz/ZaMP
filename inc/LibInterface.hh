@@ -7,11 +7,14 @@
 #include "AbstractInterp4Command.hh"
 
 class LibInterface{
-  public:
-  	LibInterface( const char* LibName );
-	void* LibHandler;
-	std::string CmdName;
-	AbstractInterp4Command* (*pCreateCmd)(void);
-};
+private:
+    void *_LibHandler;
+    std::string _CmdName;
+    AbstractInterp4Command *(*_pCreateCmd)(void);
 
+public:
+    ~LibInterface();
+    bool init(std::string libraryName);
+    AbstractInterp4Command *CreateCmd();
+};
 #endif

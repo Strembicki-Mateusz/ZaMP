@@ -6,6 +6,7 @@
 # pragma implementation
 #endif
 
+
 #include "AbstractInterp4Command.hh"
 
 /*!
@@ -26,7 +27,15 @@ class Interp4Set: public AbstractInterp4Command {
    *  do przechowywania wartości parametrów danego polecenia.
    *  Ponieżej zdefiniowane jest tylko jedno pole jako przykład.
    */
-  double  _Speed_mmS;
+    std::string _Name;
+    double _Wsp_x;
+    double _Wsp_y;
+    double _Wsp_z;
+    double _Angle_x;
+    double _Angle_y;
+    double _Angle_z;
+  
+  
  public:
   /*!
    * \brief
@@ -60,9 +69,7 @@ class Interp4Set: public AbstractInterp4Command {
    * \retval true - operacja powiodła się,
    * \retval false - w przypadku przeciwnym.
    */
-  virtual bool ExecCmd( AbstractScene      &rScn, 
-                        const char         *sMobObjName,
-                        AbstractComChannel &rComChann ) override;
+  virtual bool ExecCmd(Scene *scene) const override;
   /*!
    * \brief Czyta wartości parametrów danego polecenia
    */
